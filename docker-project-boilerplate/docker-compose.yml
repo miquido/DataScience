@@ -1,0 +1,10 @@
+version: '2'
+
+services:
+  app:
+    build: .
+    ports:
+    - "8888:8888"
+    - "6006:6006"
+    volumes:
+      - .:/root
