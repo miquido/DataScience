@@ -19,12 +19,10 @@ This project basic setup is based on:
 |`-p 8888:8888 `    | This exposes the ports inside the container so they can be accessed from the host. The default iPython Notebook runs on port 8888 and Tensorboard on 6006 |
 |`-v $(pwd):/root/` | This shares the whole project root folder `$(pwd)` on your host machine to `/root` inside your container. Any data written to this folder by the container will be persistent. 
 |`ds-default:cpu`   | This the image that you want to run. The format is `image:tag`. In our case, we use the image `dl-docker` and tag `gpu` or `cpu` to spin up the appropriate image |
-|
 
 
 
---------
-
+---
 
 
 #### Running jupyter notebook backend inside container - develop locally in browser:
@@ -32,12 +30,13 @@ This project basic setup is based on:
  2. enter [http://localhost:8888/](http://localhost:8888/) or logged in console link with token
  
  
- ---- 
+---- 
  
  #### Usefull commands:
  
  | command     | effect |
  |-------------|--------|
+ |```docker ps``` | list all running containers, add flag ```-a``` to list all containers|
  |```docker rm $(docker ps -a -q)``` | remove all containers|
  | ```docker rmi $(docker images -q)```| remove all images|
  |``` docker exec -it <container-id>```| enter running container|
