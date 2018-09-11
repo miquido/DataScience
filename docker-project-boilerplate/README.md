@@ -26,7 +26,7 @@ This project basic setup is based on:
 
 
 #### Running jupyter notebook backend inside container - develop locally in browser:
- 1. inside container ```jupyter notebook --notebook-dir=/notebooks --ip 0.0.0.0 --no-browser --allow-root"```
+ 1. inside container ```jupyter notebook --notebook-dir=notebooks --ip 0.0.0.0 --no-browser --allow-root"```
  2. enter [http://localhost:8888/](http://localhost:8888/) or logged in console link with token
  
  
