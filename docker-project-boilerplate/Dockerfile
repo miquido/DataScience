@@ -18,14 +18,11 @@
 #
 
 ARG UBUNTU_VERSION=16.04
-ARG PYTHON_VERSION=3.6
 FROM ubuntu:${UBUNTU_VERSION}
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-        python${PYTHON_VERSION} \
         build-essential \
         curl \
-        git \
         libcurl3-dev \
         libfreetype6-dev \
         libhdf5-serial-dev \
@@ -44,28 +41,26 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-ARG USE_PYTHON_3_NOT_2=True
-ARG _PY_SUFFIX=${USE_PYTHON_3_NOT_2:+3}
-ARG PYTHON=python${_PY_SUFFIX}
-ARG PIP=pip${_PY_SUFFIX}
+RUN add-apt-repository ppa:jonathonf/python-3.6
+RUN apt-get update
+RUN apt-get install -y build-essential python3.6 python3.6-dev python3-pip python3.6-venv \
+    python3-pip
 
-RUN apt-get update && apt-get install -y \
-    ${PYTHON} \
-    ${PYTHON}-pip
 
-RUN ${PIP} install --upgrade \
+# setup python3.6 as default choice for command python3
+RUN rm /usr/bin/python3 && \
+    ln -s /usr/bin/python3.6 /usr/bin/python3
+
+RUN pip3 install --upgrade \
     pip \
     setuptools \
     scikit-learn
 
 
-
 RUN apt-get update && apt-get install -y \
     build-essential \
     curl \
-    git \
     openjdk-8-jdk \
-    ${PYTHON}-dev \
     swig
 
 # Install bazel
@@ -74,16 +69,15 @@ RUN echo "deb [arch=amd64] http://storage.googleapis.com/bazel-apt stable jdk1.8
     apt-get update && \
     apt-get install -y bazel
 
-RUN ${PIP} install jupyter
 
-COPY requirements.txt /requirements.txt
+COPY ./requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 
 RUN mkdir /notebooks && chmod a+rwx /notebooks
 RUN mkdir /.local && chmod a+rwx /.local
 
-WORKDIR /root
 
+WORKDIR /root
 #expose ports for jupter and tensorboard
 EXPOSE 8888 6006
 
