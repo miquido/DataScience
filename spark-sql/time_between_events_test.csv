@@ -1,0 +1,8 @@
+userId,sessionId,playlist_id,event_name,timestamp
+1,1,A,start,1
+1,1,,another,2
+1,1,A,stop,3
+1,1,B,start,4
+1,1,,another,5
+1,1,C,start,6
+1,1,C,stop,7
