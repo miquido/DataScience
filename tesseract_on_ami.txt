@@ -1,0 +1,43 @@
+install python 
+https://tecadmin.net/install-python-3-7-amazon-linux/
+
+yum install gcc-c++
+
+sudo yum install python-pip
+sudo yum install python3-pip
+-- install conda by https://linuxize.com/post/how-to-install-anaconda-on-centos-7/
+
+conda install -c conda-forge poppler
+
+activate source <optional: conda env>
+pip install pdf2image
+pip install pytesseract
+
+
+sudo yum install autoconf aclocal automake
+sudo yum install libtool
+sudo yum install libjpeg-devel libpng-devel libtiff-devel zlib-devel
+http://www.leptonica.org/source/leptonica-1.78.0.tar.gz
+tar -zxvf leptonica-1.78.0.tar.gz
+cd leptonica-1.78.0
+./configure
+make
+sudo make install
+cd ..
+wget https://github.com/tesseract-ocr/tesseract/archive/3.04.00.tar.gz
+tar -zxvf 3.04.00.tar.gz
+cd tesseract-3.04.00/
+./autogen.sh
+./configure
+make
+sudo make install
+sudo ldconfig
+
+cd /usr/local/share/tessdata
+sudo wget https://github.com/tesseract-ocr/tessdata/blob/master/eng.traineddata 
+sudo wget https://github.com/tesseract-ocr/tessdata/blob/master/pl.traineddata 
+export TESSDATA_PREFIX=/usr/local/share/
+vi ~/.bash_profile
+# Copy this line to the end: export TESSDATA_PREFIX=/usr/local/share/
+# Verify:
+tesseract --list-langs
