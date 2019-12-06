@@ -107,3 +107,6 @@ venv.bak/
 
 data/db
 apache-spark-tutorials/data
+flower_photos.tgz
+model-full.h5
+apache-spark-tutorials/flower_photos
